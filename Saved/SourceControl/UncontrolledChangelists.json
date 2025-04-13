@@ -5,6 +5,13 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/MC_Sample/Animations/ProneCrawl/am_ProneCrawl_idle.uasset",
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/MC_Sample/Animations/ProneCrawl/am_ProneCrawl_Trans_Crouch.uasset",
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/MC_Sample/Animations/ProneCrawl/am_Crouch_Trans_ProneCrawl1.uasset",
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/MC_Sample/Animations/ProneCrawl/am_Crouch_Trans_ProneCrawl.uasset",
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/MC_Sample/Animations/ProneCrawl/am_ProneCrawl_Loco_Crawl_Back.uasset",
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/ThirdPerson/Input/Actions/IA_Prone.uasset",
+				"C:/Users/infam/OneDrive/Documents/Unreal Projects/GameRemakeForLearning/Content/ThirdPerson/Input/IMC_Default.uasset",
 				"C:/Users/Tony/Documents/Unreal Projects/GameRemakeForLearning/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset",
 				"C:/Users/Tony/Documents/Unreal Projects/GameRemakeForLearning/Content/ThirdPerson/Input/Actions/IA_Crouch.uasset",
 				"C:/Users/Tony/Documents/Unreal Projects/GameRemakeForLearning/Content/ThirdPerson/Input/IMC_Default.uasset",
