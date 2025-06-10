@@ -1,7 +1,16 @@
 # MGS Remake
 ## Notes
 - Currently, the collision capsule cannot be expanded to encompass the full mesh, and the character's movement component is based on the capsule component. If we want to make an accurate mesh for collision purposes, **we need to rebuild our own character**.
-- Need to implement collision detect for crouch, crouch to prone, and prone to crouch, likely as a function.
+
+## April 20, 2025
+- Condensed CheckOverheadCollision into a Function, allowing to easily add feature into other movement inputs
+    - CheckOverheadCollision functions draws a line from the center of mass to Z 180 (standing height of Capsule) and Z 120 (crouching height of Capsule), returning a true/false value for each line to detect collision
+    - Two outputs are provided, To Stand and To Crouch, allowing the same function to be used to detect overhead collision from either stance, if it matters
+    - Removed line visibility by setting 'Draw Debug Type' to 'None' for both traces
+- Added boolean outputs for CheckOverheadCollision Function to determine if the character can stand or crouch from current position
+- Reconfigured Crouch Input to check overhead when standing
+- Reconfigured Crouch Input to check overhead when crouching from prone, allowing smooth transistion between both states
+- Reconfigured Prone Input to check overhead when standing
 
 ## April 17, 2025
 - Fixed Prone mechanic, now sets speed by adding/subtracting 'CrawlSpeed' to Max Walk Speed
