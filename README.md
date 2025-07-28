@@ -1,7 +1,37 @@
 # MGS Remake
 ## Notes
-- Currently, the collision capsule cannot be expanded to encompass the full mesh, and the character's movement component is based on the capsule component. If we want to make an accurate mesh for collision purposes, **we need to rebuild our own character**.
-- Need to implement collision detect for crouch, crouch to prone, and prone to crouch, likely as a function.
+- Next step is to work on Climb mechanic
+    - Single button input to climb shoulder height obstacles and/or leap small distances
+    - Refer to following links:
+        - https://www.youtube.com/watch?v=THbQaOII5bU
+        - https://www.youtube.com/watch?v=6hPArmWkKJQ
+        - https://www.youtube.com/watch?v=wKafQYX8fz4
+        - https://youtu.be/BJIo5ChGJv4
+
+## July 27, 2025
+- Added 'Current State' and 'Previous State' enum variables to BP_ThirdPersonCharacter and ABP_Manny
+    - Reference enum variables in ABP_Manny\EventGraph
+    - Configured Prone transitions to reference Previous State and play correct animation
+    - Set is Crouching event now uses enum variable
+    - Set is Prone event now uses enum variable
+- Reworked Crouch Input and Prone Input
+    - Uses enum instead of boolean variables
+    - Organized into flow charts to easily follow order of operations
+- Reworked Prone Hitbox Adjustment to transition between Stand and Crouch
+    - Uses Previous State variable to choose between two float integers
+    - **BUG**: When entering Prone from Crouch with object overhead, hitbox resets to Stand, unsure of cause
+- Imported CheckCollision function (see below) into Porter's branch
+- Prepared to delete Tony branch and merge Porter branch into Main (goodnight sweet prince)
+
+## April 20, 2025
+- Condensed CheckOverheadCollision into a Function, allowing to easily add feature into other movement inputs
+    - CheckOverheadCollision functions draws a line from the center of mass to Z 180 (standing height of Capsule) and Z 120 (crouching height of Capsule), returning a true/false value for each line to detect collision
+    - Two outputs are provided, To Stand and To Crouch, allowing the same function to be used to detect overhead collision from either stance, if it matters
+    - Removed line visibility by setting 'Draw Debug Type' to 'None' for both traces
+- Added boolean outputs for CheckOverheadCollision Function to determine if the character can stand or crouch from current position
+- Reconfigured Crouch Input to check overhead when standing
+- Reconfigured Crouch Input to check overhead when crouching from prone, allowing smooth transistion between both states
+- Reconfigured Prone Input to check overhead when standing
 
 ## April 17, 2025
 - Fixed Prone mechanic, now sets speed by adding/subtracting 'CrawlSpeed' to Max Walk Speed
