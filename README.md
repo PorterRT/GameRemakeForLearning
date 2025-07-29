@@ -8,6 +8,25 @@
         - https://www.youtube.com/watch?v=wKafQYX8fz4
         - https://youtu.be/BJIo5ChGJv4
 
+## July 28, 2025
+- Merged all branches to main and created new 'Experimental' branch
+- Fixed bug in 'CheckCollision' function
+    - Previously, attempting to leave Prone while character is at any Z-value > 0 would break collision detection
+    - Rewrote formula to instead draw a Line Trace from the base of the capsule to the tip of the capsule
+- Split 'Prone Hitbox Adjustment' into two event trees
+    - When transitioning from Crouch to Prone, it follows the first tree;
+        - Capsule Component's Capsule Size from 60 to 35
+        - Mesh's Relative Location Z-value from -59 to -34
+    - When transitioning from Stand to Prone, it follows the second tree;
+        - Capsule Component's Capsule Size from 90 to 35
+        - Mesh's Relative Location Z-value from -89 to -34
+- Discovered cause of bug: Crouch to Prone Capsule Reset
+    - Bug: When the character is Crouched and they attempt to Prone, the capsule will result to Stand dimensions if attempted under an obstacle
+    - Cause: When the character attempts to enter Prone while Crouched, the first step is to Un Crouch the player, which resets the Capsule dimensions to Stand.
+        - This is why there is a strange visual glitch between the transitions.
+        - When under an obstacle, the Un Crouch function resets the Capsule dimensions, causing the mesh to clip into geometry for a split second. The engine resolves this clipping by resetting the Capsule to default (Standing) dimensions as soon as it is able to do so (ie. when leaving the obstacle).
+    - Fix: Unsure at this moment, I suspect we'll have to rework the logic somewhere along the Event.
+
 ## July 27, 2025
 - Added 'Current State' and 'Previous State' enum variables to BP_ThirdPersonCharacter and ABP_Manny
     - Reference enum variables in ABP_Manny\EventGraph
