@@ -8,6 +8,20 @@
         - https://www.youtube.com/watch?v=wKafQYX8fz4
         - https://youtu.be/BJIo5ChGJv4
 
+## July 29, 2025
+- Began implementation of Climb mechanic
+        - YouTube Link: https://youtu.be/Vxbju_QotS4
+    - Created an 'AttachToWall' custom event which draws a line from the center of the capsule 3 radi ahead, checks for collision, and orients the mesh to face the wall if collision is detected
+    - Bound this custom event to 'F' key
+- Find and import animations for Climb and Crouch Walk
+    - Downloaded several animations from Mixamo, created new folder to store assets and animations
+    - Retargeted the animations (right click) to 'SKM_Quinn' and saved under 'ThirdPerson\Animations\Climb\...'
+        - YouTube Link: https://youtu.be/iE474cUpR-o
+- Created a new Blend Space for climbing
+    - Set X and Y axis to range from -100 to 100 to match climb speed
+    - Added Idle animation to center, ShimmyRight/ShimmyLeft animations to X axis, and ClimbUp/ClimbDown to Y axis
+- Also changed the Crouch Walk blend space to use a Mixamo animation instead of previous one
+
 ## July 28, 2025
 - Merged all branches to main and created new 'Experimental' branch
 - Fixed bug in 'CheckCollision' function
