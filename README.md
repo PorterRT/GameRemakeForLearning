@@ -1,12 +1,74 @@
 # MGS Remake
 ## Notes
-- Next step is to work on Climb mechanic
-    - Single button input to climb shoulder height obstacles and/or leap small distances
-    - Refer to following links:
-        - https://www.youtube.com/watch?v=THbQaOII5bU
-        - https://www.youtube.com/watch?v=6hPArmWkKJQ
-        - https://www.youtube.com/watch?v=wKafQYX8fz4
-        - https://youtu.be/BJIo5ChGJv4
+- Add stamina system: https://youtu.be/oqqcvd-6aBo
+- Add bow and arrow
+- Fix locomotion transistions
+- Find new melee attack animation
+- Convert Prone function into event
+- Override innate Crouch function to fix standing bug
+
+## January 2, 2026
+- Imported Combat Mechanics from Tony's Unreal 5.7 'ThirdPersonTemplate' Project
+- Updated Project Settings
+    - Updated 'Physical Surface' types to include Head, Torso, LeftArm, RightArm, LeftLeg, and RightLeg
+    - Updated 'Trace Channels' to include Weapons trace channel
+- Features can be found in 'All\Content\_Project\*' and include;
+    - 'AimOffsets\AO_Look' aim offset and animations, the default aim offset when unarmed
+    - 'AimOffsets\AO_Knife' aim offset and animations, the aim offset to be used when aiming with a knife
+    - 'Blueprints\ActorComponents\AC_HealthSystem' actor component, which tracks total health, limb health, and applies health bar overlay via 'WBP_HUD Widget' Widget
+        - Tutorial, *How To Create A Basic Health And Limb Damage System*: https://youtu.be/E-OBGsKt63o
+    - 'Blueprints\Widgets\WBP_HUD' widget blueprint, a simple overlay with a progress bar and text box for showing the Player Character's health system
+    - 'Blueprints\AnimationComponents\AnimNS_HitDetection' blueprint class, used during melee weapon swing animations to determine when 'Weapon Trace' function, and therefore damage, is applied
+    - 'Blueprints\FunctionLibrary\BPFL_GameplayTagsFunctions' and '\BPI_GameplayTagFunctions' blueprint functions library and interface, a utility we will use in the future to apply effects for limb damage **(WORK IN PROGRESS)**
+    - 'Interfaces\BPI_Interact' blueprint interface, provides framework for Interact action input, allowing Player to pick up weapons off the floor
+    - 'Materials\PhysicalMaterials\PM_*' physical materials are mapped to 'PA_Mannequin', the physics asset for 'BP_MasterCharacter' skeletal mesh asset, allowing for designation of limbs for purposes of limb health tracking
+        - Updated PA_Mannequin, assigned relevant PM_* to bones
+    - 'Props\Pickups\*' contains 'BP_PickupMaster' blueprint class and associated children, allowing for the creation of weapon pickups and their associated properties
+    - 'Props\Weapons\*' contains;
+        - 'BP_WeaponMaster' blueprint class and associated children, which stores weapon variables, mesh assets, and animations
+        - 'Enum_FireMode' enumeration, obsolete but may be used in the future
+        - 'Enum_WeaponName' enumeration, which stores the unique name of each weapon child to reference in 'Interact' function
+        - 'Enum_WeaponType' enumeration, which stores the general category of each weapon child to reference for purposes of states and animation
+    - 'Props\BP_Damager' blueprint class, a simple box which deals damage for the purposes of troubleshooting
+- Added 'All\Content\Assets' folder to store imported assets in one simple to find location
+- Added Input Actions and configued 'IMC_Default';
+    - 'IA_Attack' bound to Left Mouse Button
+    - 'IA_Aim' bound to Right Mouse Button
+    - 'IA_Interact' bound to E
+    - 'IA_Drop' bound to G
+- Added Weapon Sockets to 'SK_Mannequin';
+    - Tutorial, *How To Create A Weapons System (2.0)*: https://youtu.be/H_Q57Yso9mM
+    - Sockets are used to attach the weapon to the Player mesh in the correct location, rotation, and scale
+    - Added 'Knife_A_Socket'
+    - Added 'Pistols_A_Socket'
+- 'BP_MasterCharacter' combat functionality added;
+    - Variables added:
+        - 'Gameplay Tags Container' references Gameplay Tag Container structure
+        - 'CurrentWeaponEnum' references Enum_WeaponName enumerator
+        - 'IsAlive' boolean
+        - 'IsAttacking' boolean
+        - 'IsAiming' boolean
+        - 'IsTurning' boolean
+        - 'LockedTargetYaw' float 
+        - 'Components\Current Weapon' references BP_WeaponMaster object
+    - Set 'BP_MasterCharacter' Capsule Component collision to ignore Weapons trace channel
+    - Set 'BP_MasterCharacter' Actor Tag to 'Human'
+    - 'MeleeWeaponTrace' function, which draws a sphere trace from the base to tip of a melee weapon every frame of an attack animation when notified by 'AnimNS_HitDetection'
+    - Changed 'CameraBoom' component Transform Location Z to 45, Camera Target Arm Length to 200, and Camera Socket Offset to 0, 50, 10
+    - Pickup Weapon function via 'IA_Interact', which references BPI_Interact to spawn an overlapping weapon in the associated Player socket and deletes the free component
+    - Drop Weapon function via 'IA_Drop', which spawns the weapon in front of the Player and deletes from associated socket
+    - Attack function via 'IA_Attack', which checks for weapon type and plays associated function
+    - Aim function via 'IA_Aim', which lerps CameraBoom > Socket Offset and Character Movement > Max Walk Speed using timeline
+    - 'Fire Weapon' Custom Event, playing the fire animation of the associated weapon and drawing a line trace to check for collision, applies point damage if strikes Actor with 'Human' tag
+    - 'Swing Weapon' Custom Event, playing the melee swing animation of the associated weapon and draws a sphere trace (refer to MeleeWeaponTrace function and AnimNS_HitDetection)
+- 'ABP_Manny' combat animation functionality added;
+    - Event Graph tracks current weapon equipped, whether the Player is aiming, and transmits AnimNotify for when attack animation is complete
+    - Event Graph tracks the Player's Camera Yaw and Pitch for the purposes of calculating Aim Offset
+    - Added Aim Offsets for Unarmed State, 'AO_Look', and Knife State, 'AO_Knife'
+- 'ABP_Manny' locomotion has been reconfigured
+    - Climb state 'BS_Climb' now works, Idle to Climb (rule) required measuring whether Z velocity is increasing or not
+- Added child of 'BP_MasterCharacter', 'BP_Player'
+    - Added HUD widget which is overlayed on viewport at start of play
 
 ## July 29, 2025
 - Began implementation of Climb mechanic
