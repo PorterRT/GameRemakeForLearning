@@ -1,11 +1,14 @@
 # MGS Remake
 ## Notes
 - Add stamina system: https://youtu.be/oqqcvd-6aBo
-- Add bow and arrow
-- Fix locomotion transistions
+- Add bow and arrow: https://youtu.be/se8gkySUfi4?list=PLNwKK6OwH7eWELWykJv1-P9gVLKAHkWqz
+- Add limb damage status effects: https://youtu.be/2hH2npzGQNI
+- Add functionality to spawn with weapon: (?) https://youtu.be/H_Q57Yso9mM
+- Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
+- Add physics constraint component: https://youtu.be/N5iepSot6XM
 - Find new melee attack animation
-- Convert Prone function into event
-- Override innate Crouch function to fix standing bug
+- Fix 'Sprint' mechanic affecting other locomotion state bug in BP_MasterCharacter
+- Fix 'BS_Climb' Z velocity bug in ABP_Manny
 
 ## January 2, 2026
 - Imported Combat Mechanics from Tony's Unreal 5.7 'ThirdPersonTemplate' Project
@@ -67,8 +70,16 @@
     - Added Aim Offsets for Unarmed State, 'AO_Look', and Knife State, 'AO_Knife'
 - 'ABP_Manny' locomotion has been reconfigured
     - Climb state 'BS_Climb' now works, Idle to Climb (rule) required measuring whether Z velocity is increasing or not
+    - Nevermind I lied, it doesn't work
 - Added child of 'BP_MasterCharacter', 'BP_Player'
     - Added HUD widget which is overlayed on viewport at start of play
+- Improved 'Crouch' and 'Prone' Inputs in 'BP_MasterCharacter'
+    - Added transistion animations into custom event for each locomotion state
+    - Renamed 'Animation States' to 'Enum_LocomotionStates'
+    - 'Locomotion' Macro uses timeline and lerp components to all transistions between locomotion states
+    - Removed unnecessary functions and input actions
+- Updated 'Sprint' Input in 'BP_MasterCharacter'
+    - Only allows sprinting while standing and not aiming
 
 ## July 29, 2025
 - Began implementation of Climb mechanic
