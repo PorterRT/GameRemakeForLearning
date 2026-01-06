@@ -7,8 +7,11 @@
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 - Find new melee attack animation
-- Fix 'Sprint' mechanic affecting other locomotion state bug in BP_MasterCharacter
-- Fix 'BS_Climb' Z velocity bug in ABP_Manny
+
+## January 5, 2026
+- Fixed Climb Blendspace in ABP_Manny
+- Fixed Sprint mechanic's blending into other locomotion states
+- Reconfigured the Climb input to check for other states when attempting to climb
 
 ## January 2, 2026
 - Imported Combat Mechanics from Tony's Unreal 5.7 'ThirdPersonTemplate' Project
