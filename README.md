@@ -1,12 +1,27 @@
 # MGS Remake
 ## Notes
-- Add stamina system: https://youtu.be/oqqcvd-6aBo
 - Add bow and arrow: https://youtu.be/se8gkySUfi4?list=PLNwKK6OwH7eWELWykJv1-P9gVLKAHkWqz
 - Add limb damage status effects: https://youtu.be/2hH2npzGQNI
 - Add functionality to spawn with weapon: (?) https://youtu.be/H_Q57Yso9mM
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 - Find new melee attack animation
+
+## January 9, 2026
+- NOTE: Stamina drain currently only applies to sprinting, need to modify the system from the tutorial to be more modular
+    - TBA: Stamina drain when
+        - Climbing
+        - Jumping
+        - Attacking
+- Added a Stamina System
+    - Tutorial, *How To Set Up A Basic Stamina System*: https://youtu.be/oqqcvd-6aBo
+    - Added variables to 'BP_MasterCharacter'
+        - 'HasStamina' boolean
+        - 'Stamina' float
+    - Added custom events to 'BP_MasterCharacter'
+        - 'Consume Stamina' custom event, which drains stamina by 0.025, checks locomotion, and either repeats process, replenishes, or stops movement
+        - 'Replenish Stamina' custom event, which checks for 0 stamina, and replenishes by 0.01 until full or stamina consuming action begins
+    - Integrated stamina system in 'WBP_HUD' by casting BP_MasterCharacter to bindings for progress bar and text box
 
 ## January 5, 2026
 - Fixed Climb Blendspace in ABP_Manny
