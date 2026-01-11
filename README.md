@@ -7,6 +7,34 @@
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 - Find new melee attack animation
 
+
+## January 10, 2026 
+- Current AI States
+    - Routine, wanders the randomly map and waits at intervals
+    - Combat, chases after the player if they are seen and will attack when in range
+    - Searching, moves to the last known location of the player if they were seen but then lost sight of them then waits for the max age of its memory to run out then returns to routine unless the player is seen again
+
+- Ai Overview 
+  - AiController - AIC_Enemy
+    - Contains Perception component, which uses sight sense to detect player pawn based of stimuli placed within the master character
+    - Contains State Machine link to manage behavior states
+
+  - Generic_EnemyNPC
+    - Based off the same master character as the player, contains variables for health and damage 
+    - Linked to the AiController to manage behavior
+    
+  - Evalulators - uses master base evaluator
+    - Current evaluator is a sight based evaluator
+        - Handles detecting the player pawn based on line of sight and distance, detecting distance to the precived player, and losing sight of the player then forgetting the player based off max age in the Ai Controller perception component
+        
+  - Tasks - uses a master base task.
+    - Tasks have a start and end event they are for giving a event to the state tree to execute
+        - Current tasks include Attack player, Get Random Location, Spawn Weapon. There are included tasks within unreal such as delay and move to location
+  
+  - State Tree - used to dictate the behavior of the Ai
+    - Connects to both the NPC and the AI Controller. Both need to correct context set within them to work
+    - Checks all evaluators, tags, booleans, and executes tasks based on the results then transitions based off of the tree and conditions met.
+
 ## January 9, 2026
 - NOTE: Stamina drain currently only applies to sprinting, need to modify the system from the tutorial to be more modular
     - TBA: Stamina drain when
