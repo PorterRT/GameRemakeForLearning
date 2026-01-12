@@ -1,12 +1,131 @@
 # MGS Remake
 ## Notes
-- Next step is to work on Climb mechanic
-    - Single button input to climb shoulder height obstacles and/or leap small distances
-    - Refer to following links:
-        - https://www.youtube.com/watch?v=THbQaOII5bU
-        - https://www.youtube.com/watch?v=6hPArmWkKJQ
-        - https://www.youtube.com/watch?v=wKafQYX8fz4
-        - https://youtu.be/BJIo5ChGJv4
+- Add bow and arrow: https://youtu.be/se8gkySUfi4?list=PLNwKK6OwH7eWELWykJv1-P9gVLKAHkWqz
+- Add limb damage status effects: https://youtu.be/2hH2npzGQNI
+- Add functionality to spawn with weapon: (?) https://youtu.be/H_Q57Yso9mM
+- Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
+- Add physics constraint component: https://youtu.be/N5iepSot6XM
+- Find new melee attack animation
+
+
+## January 10, 2026 
+- Current AI States
+    - Routine, wanders the randomly map and waits at intervals
+    - Combat, chases after the player if they are seen and will attack when in range
+    - Searching, moves to the last known location of the player if they were seen but then lost sight of them then waits for the max age of its memory to run out then returns to routine unless the player is seen again
+
+- Ai Overview 
+  - AiController - AIC_Enemy
+    - Contains Perception component, which uses sight sense to detect player pawn based of stimuli placed within the master character
+    - Contains State Machine link to manage behavior states
+
+  - Generic_EnemyNPC
+    - Based off the same master character as the player, contains variables for health and damage 
+    - Linked to the AiController to manage behavior
+    
+  - Evalulators - uses master base evaluator
+    - Current evaluator is a sight based evaluator
+        - Handles detecting the player pawn based on line of sight and distance, detecting distance to the precived player, and losing sight of the player then forgetting the player based off max age in the Ai Controller perception component
+        
+  - Tasks - uses a master base task.
+    - Tasks have a start and end event they are for giving a event to the state tree to execute
+        - Current tasks include Attack player, Get Random Location, Spawn Weapon. There are included tasks within unreal such as delay and move to location
+  
+  - State Tree - used to dictate the behavior of the Ai
+    - Connects to both the NPC and the AI Controller. Both need to correct context set within them to work
+    - Checks all evaluators, tags, booleans, and executes tasks based on the results then transitions based off of the tree and conditions met.
+
+## January 9, 2026
+- NOTE: Stamina drain currently only applies to sprinting, need to modify the system from the tutorial to be more modular
+    - TBA: Stamina drain when
+        - Climbing
+        - Jumping
+        - Attacking
+- Added a Stamina System
+    - Tutorial, *How To Set Up A Basic Stamina System*: https://youtu.be/oqqcvd-6aBo
+    - Added variables to 'BP_MasterCharacter'
+        - 'HasStamina' boolean
+        - 'Stamina' float
+    - Added custom events to 'BP_MasterCharacter'
+        - 'Consume Stamina' custom event, which drains stamina by 0.025, checks locomotion, and either repeats process, replenishes, or stops movement
+        - 'Replenish Stamina' custom event, which checks for 0 stamina, and replenishes by 0.01 until full or stamina consuming action begins
+    - Integrated stamina system in 'WBP_HUD' by casting BP_MasterCharacter to bindings for progress bar and text box
+
+## January 5, 2026
+- Fixed Climb Blendspace in ABP_Manny
+- Fixed Sprint mechanic's blending into other locomotion states
+- Reconfigured the Climb input to check for other states when attempting to climb
+
+## January 2, 2026
+- Imported Combat Mechanics from Tony's Unreal 5.7 'ThirdPersonTemplate' Project
+- Updated Project Settings
+    - Updated 'Physical Surface' types to include Head, Torso, LeftArm, RightArm, LeftLeg, and RightLeg
+    - Updated 'Trace Channels' to include Weapons trace channel
+- Features can be found in 'All\Content\_Project\*' and include;
+    - 'AimOffsets\AO_Look' aim offset and animations, the default aim offset when unarmed
+    - 'AimOffsets\AO_Knife' aim offset and animations, the aim offset to be used when aiming with a knife
+    - 'Blueprints\ActorComponents\AC_HealthSystem' actor component, which tracks total health, limb health, and applies health bar overlay via 'WBP_HUD Widget' Widget
+        - Tutorial, *How To Create A Basic Health And Limb Damage System*: https://youtu.be/E-OBGsKt63o
+    - 'Blueprints\Widgets\WBP_HUD' widget blueprint, a simple overlay with a progress bar and text box for showing the Player Character's health system
+    - 'Blueprints\AnimationComponents\AnimNS_HitDetection' blueprint class, used during melee weapon swing animations to determine when 'Weapon Trace' function, and therefore damage, is applied
+    - 'Blueprints\FunctionLibrary\BPFL_GameplayTagsFunctions' and '\BPI_GameplayTagFunctions' blueprint functions library and interface, a utility we will use in the future to apply effects for limb damage **(WORK IN PROGRESS)**
+    - 'Interfaces\BPI_Interact' blueprint interface, provides framework for Interact action input, allowing Player to pick up weapons off the floor
+    - 'Materials\PhysicalMaterials\PM_*' physical materials are mapped to 'PA_Mannequin', the physics asset for 'BP_MasterCharacter' skeletal mesh asset, allowing for designation of limbs for purposes of limb health tracking
+        - Updated PA_Mannequin, assigned relevant PM_* to bones
+    - 'Props\Pickups\*' contains 'BP_PickupMaster' blueprint class and associated children, allowing for the creation of weapon pickups and their associated properties
+    - 'Props\Weapons\*' contains;
+        - 'BP_WeaponMaster' blueprint class and associated children, which stores weapon variables, mesh assets, and animations
+        - 'Enum_FireMode' enumeration, obsolete but may be used in the future
+        - 'Enum_WeaponName' enumeration, which stores the unique name of each weapon child to reference in 'Interact' function
+        - 'Enum_WeaponType' enumeration, which stores the general category of each weapon child to reference for purposes of states and animation
+    - 'Props\BP_Damager' blueprint class, a simple box which deals damage for the purposes of troubleshooting
+- Added 'All\Content\Assets' folder to store imported assets in one simple to find location
+- Added Input Actions and configued 'IMC_Default';
+    - 'IA_Attack' bound to Left Mouse Button
+    - 'IA_Aim' bound to Right Mouse Button
+    - 'IA_Interact' bound to E
+    - 'IA_Drop' bound to G
+- Added Weapon Sockets to 'SK_Mannequin';
+    - Tutorial, *How To Create A Weapons System (2.0)*: https://youtu.be/H_Q57Yso9mM
+    - Sockets are used to attach the weapon to the Player mesh in the correct location, rotation, and scale
+    - Added 'Knife_A_Socket'
+    - Added 'Pistols_A_Socket'
+- 'BP_MasterCharacter' combat functionality added;
+    - Variables added:
+        - 'Gameplay Tags Container' references Gameplay Tag Container structure
+        - 'CurrentWeaponEnum' references Enum_WeaponName enumerator
+        - 'IsAlive' boolean
+        - 'IsAttacking' boolean
+        - 'IsAiming' boolean
+        - 'IsTurning' boolean
+        - 'LockedTargetYaw' float 
+        - 'Components\Current Weapon' references BP_WeaponMaster object
+    - Set 'BP_MasterCharacter' Capsule Component collision to ignore Weapons trace channel
+    - Set 'BP_MasterCharacter' Actor Tag to 'Human'
+    - 'MeleeWeaponTrace' function, which draws a sphere trace from the base to tip of a melee weapon every frame of an attack animation when notified by 'AnimNS_HitDetection'
+    - Changed 'CameraBoom' component Transform Location Z to 45, Camera Target Arm Length to 200, and Camera Socket Offset to 0, 50, 10
+    - Pickup Weapon function via 'IA_Interact', which references BPI_Interact to spawn an overlapping weapon in the associated Player socket and deletes the free component
+    - Drop Weapon function via 'IA_Drop', which spawns the weapon in front of the Player and deletes from associated socket
+    - Attack function via 'IA_Attack', which checks for weapon type and plays associated function
+    - Aim function via 'IA_Aim', which lerps CameraBoom > Socket Offset and Character Movement > Max Walk Speed using timeline
+    - 'Fire Weapon' Custom Event, playing the fire animation of the associated weapon and drawing a line trace to check for collision, applies point damage if strikes Actor with 'Human' tag
+    - 'Swing Weapon' Custom Event, playing the melee swing animation of the associated weapon and draws a sphere trace (refer to MeleeWeaponTrace function and AnimNS_HitDetection)
+- 'ABP_Manny' combat animation functionality added;
+    - Event Graph tracks current weapon equipped, whether the Player is aiming, and transmits AnimNotify for when attack animation is complete
+    - Event Graph tracks the Player's Camera Yaw and Pitch for the purposes of calculating Aim Offset
+    - Added Aim Offsets for Unarmed State, 'AO_Look', and Knife State, 'AO_Knife'
+- 'ABP_Manny' locomotion has been reconfigured
+    - Climb state 'BS_Climb' now works, Idle to Climb (rule) required measuring whether Z velocity is increasing or not
+    - Nevermind I lied, it doesn't work
+- Added child of 'BP_MasterCharacter', 'BP_Player'
+    - Added HUD widget which is overlayed on viewport at start of play
+- Improved 'Crouch' and 'Prone' Inputs in 'BP_MasterCharacter'
+    - Added transistion animations into custom event for each locomotion state
+    - Renamed 'Animation States' to 'Enum_LocomotionStates'
+    - 'Locomotion' Macro uses timeline and lerp components to all transistions between locomotion states
+    - Removed unnecessary functions and input actions
+- Updated 'Sprint' Input in 'BP_MasterCharacter'
+    - Only allows sprinting while standing and not aiming
 
 ## July 29, 2025
 - Began implementation of Climb mechanic
