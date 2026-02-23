@@ -1,12 +1,52 @@
 # MGS Remake
 ## Notes
-- Add bow and arrow: https://youtu.be/se8gkySUfi4?list=PLNwKK6OwH7eWELWykJv1-P9gVLKAHkWqz
-- Add limb damage status effects: https://youtu.be/2hH2npzGQNI
-- Add functionality to spawn with weapon: (?) https://youtu.be/H_Q57Yso9mM
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
-- Find new melee attack animation
 
+## February 23, 2026
+- Massive overhaul of various actions, components, and functions
+- Added new actor component, BPC_DamageSystem, and interface, BPI_Damagable
+    - New actor component can be applied to any actor to add health, limb damage, damage responses, and additional variables
+    - Component interacts with other actors via BPI_Damagable interface, which must have functions defined in each actor where needed
+    - Interface functions include:
+        - GetCurrentHealth function, Input none, Output Health (float)
+        - GetMaxHealth function, Input none, Output MaxHealth (float)
+        - Heal function, Input Amount (float), Output NewHealth (float)
+        - TakeDamage function, Input DamageInfo (structure), Output WasDamaged (boolean)
+    - Aforementioned structure variable is defined in S_DamageInfo, which includes:
+        - Amount (float)
+        - DamageLimb (E_PhysicalSurface)
+        - DamageType (E_DamageType)
+        - DamageResponse (E_DamageResponse)
+        - ShouldDamageInvincible (boolean)
+        - CanBeBlocked (boolean)
+        - CanBeParried (boolean)
+        - ShouldForceInterrupt (boolean)
+    - Component will interact with W_HealthBar widget, which pulls Health and MaxHealth from BPI_Damagable to set ProgressBar_Health
+    - Actors must create events for Death, LimbCrippled, Blocked, and DamageResponse, and be bound to their respective event dispatchers
+- Added new actor component, BPC_StaminaSystem
+    - New actor component can be applied to any actor to add stamina, and use event dispatchers to initiate drained stamina events
+    - Event ConsumeStamina can reduce stamina by amount input, and can be set to ongoing
+        - Call function EndOngoing at end of ongoing action to stop stamina drain
+    - Event ReplenishStamina will automatically call 1 second after ConsumeStamina ends, and will wait 2.5 seconds to replenish if stamina is empty
+    - Actors must create events for StaminaDrained, and be bound to their respective event dispatcher
+- Added new actor component, BPC_CombatSystem
+    - New actor component to implement combat functionality dependant on E_WeaponType
+    - Event AimBegin and AimEnd controls orientation of the character relative to the camera and calls for crosshair to appear
+    - Event DrawBegin and DrawEnd controls the length of an attack's windup, which currently affects Melee damage output and Throwable range output
+    - Event Attack picks between three macros; MeleeAttack, RangedAttack, and ThrownAttack
+        - MeleeAttack calls OnConsumeStamina event dispatcher, determines the sound to play on attack, and which animation montage to play depending on Draw Time
+        - RangedAttack calls for a loaded ranged weapon, LaunchProjectile function, determines the sound to play on fire, and which animation montage to play
+        - ThrownAttack calls SpawnProjectile function, LaunchProjectile function, ConsumeStamina event dispatcher, determines the sound to play on throw, and which animation montage to play
+    - Reload event, specific to Ranged Weapon Types, it will load a projectile into a ranged weapon and set the weapon to be loaded
+    - MeleeTrace function is called on AnimNS_HitDetection, a notify state used in animation montages to trigger something per tick when active
+        - Draws a trace sphere around the blade per tick of the attack animation, determines damage based on DrawTime, and calls TakeDamage (Message)
+    - Actors must create events for UnEquipWeapon, and be bound to their respective event dispatcher
+- Added new actor, BP_NonPlayerCharacter
+    - Barebones actor used for testing purposes, and should be used going forward for AI enemies
+- Reconfigured numerous files
+- Deleted redundant assets
+- Added new animations for combat, movement, and a new ABP_MasterCharacter
 
 ## January 10, 2026 
 - Current AI States
