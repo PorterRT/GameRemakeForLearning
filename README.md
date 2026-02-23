@@ -4,6 +4,13 @@
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 
 ## February 23, 2026
+- Tweak to the melee attack in BPC_CombatSystem
+    - Melee attacks will generate three traces, one at 45°, 90°, and 135°, in order to draw the arc of a swing
+    - This trace can also generate a single trace directly in front of the character in order to determine a stab
+    - These trace results will check if the component hit has a BPC_DamageSystem component, allowing the attack if true or calling to interrupt the attack if false (not yet implemented)
+    - System needs tweaking and a lot more research into interrupting animation montages, plan moving forward is the set up points in the animation montage which correlate with this arc of swing and trigger an interrupt with stagger if the character hits a non-damagable surface
+
+## February 22, 2026
 - Massive overhaul of various actions, components, and functions
 - Added new actor component, BPC_DamageSystem, and interface, BPI_Damagable
     - New actor component can be applied to any actor to add health, limb damage, damage responses, and additional variables
