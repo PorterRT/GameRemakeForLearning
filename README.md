@@ -3,6 +3,24 @@
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 
+## February 27, 2026
+- Added BP_Enemy_Ranged and BP_Enemy_Melee
+    - A simple enemy which spawns a crossbow or a sword and repeatedly attacks
+    - For development purposes, use to test attack animations, hit reactions, damage, etc
+- Fixed collision on projectiles
+    - Projectiles now have their own object type for the purposes of collision, "Projectile"
+    - Character Meshes will generate overlap events, and now when a projectile hits the Actor, it ignores the Capsule and is blocked by the Mesh
+- Began implementation of Inventory System
+    - Added BPO_ItemMaster
+        - An abstract Object Actor meant to store data universal to all inventory objects
+        - All future Items which can be put into the inventory system will be made children from this actor
+    - Added BP_ItemPickupMaster
+        - A blueprint Actor which automatically constructs a static mesh
+        - Used to spawn items into the world, allowing the player to find items around the map and add it to their inventory
+    - Added BPC_InventorySystem
+        - An actor component which uses a Set variable to keep track of items in the inventory
+        - Plan to add weight limits, recall an item to hand, remove item from inventory, and interfacing with other components (ie. BPC_StaminaSystem, BPC_CombatSystem)
+
 ## February 23, 2026
 - Tweak to the melee attack in BPC_CombatSystem
     - Melee attacks will generate three traces, one at 45°, 90°, and 135°, in order to draw the arc of a swing
