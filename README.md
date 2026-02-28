@@ -10,7 +10,13 @@
 - Fixed collision on projectiles
     - Projectiles now have their own object type for the purposes of collision, "Projectile"
     - Character Meshes will generate overlap events, and now when a projectile hits the Actor, it ignores the Capsule and is blocked by the Mesh
+- Recast ABP_MasterCharacter to Character ref
+    - Done to allow BP_Enemy_* to successfully use animation blueprint now that they are no longer children of BP_MasterCharacter
+    - With how many functions are now based on components, there were almost no conflicts
+    - Locomotion states did require casting to BP_MasterCharacter, should transfer locomotion options to component in the future
 - Began implementation of Inventory System
+    - Repurposed BPI_Interact
+        - Created function to Interact (Message) with an Instigator input
     - Added BPO_ItemMaster
         - An abstract Object Actor meant to store data universal to all inventory objects
         - All future Items which can be put into the inventory system will be made children from this actor
@@ -19,7 +25,8 @@
         - Used to spawn items into the world, allowing the player to find items around the map and add it to their inventory
     - Added BPC_InventorySystem
         - An actor component which uses a Set variable to keep track of items in the inventory
-        - Plan to add weight limits, recall an item to hand, remove item from inventory, and interfacing with other components (ie. BPC_StaminaSystem, BPC_CombatSystem)
+        - Current implementation includes add item to inventory and drop item pickup from inventory
+        - Plan to add weight limits, inventory UI, equip item, and interfacing with other components (ie. BPC_StaminaSystem, BPC_CombatSystem)
 
 ## February 23, 2026
 - Tweak to the melee attack in BPC_CombatSystem
