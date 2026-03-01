@@ -3,6 +3,26 @@
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 
+## February 28, 2026
+- Modified actor BP_Damager
+    - Damager now has an updated mesh and collision box which only interacts with actor meshes
+    - HitActors set variable will store what actor enters the collision box, deal damage to it once, and will not deal damage again until the actor leaves the box, removing it from the set
+    - Damager can be disabled with one click in the World Editor via instance 'EnableDamager'
+- Modified Object Channels
+    - Found in Edit > Project Settings > Engine - Collision > Object Channels
+    - Objects can have their collision object type be set as 'Damager', meaning an Actor's Capsule Component will ignore the object while the Mesh will overlap it, allowing more accurate hit results
+- Added new widget blueprints; W_ItemDisplay and W_ItemContainer
+    - W_ItemDisplay is for an individual item within the BPC_InventorySystem
+    - W_ItemContainer is the inventory screen that is overlayed by BPC_InventorySystem, which auto-populates with the items from the component when brought on screen
+    - UI Inputs disable all other inputs, inputs must be added into W_ItemContainer in order to respond
+        - Currently, 'Escape' and 'I' keys are bound to exit the inventory
+- Added temporary 'I' input to BP_MasterCharacter
+    - Calls a function in BPC_InventorySystem to display inventory widget, set input to UI, and initalize the inventory
+- Added enable Widget input to BPC_InventorySystem
+    - A simple boolean which signals whether to add a widget to the character
+- Added BPO_Valuable_Gold and BPO_Valuable_Silver
+    - Simple static meshes with values, names, and category set, made for development purposes
+
 ## February 27, 2026
 - Added BP_Enemy_Ranged and BP_Enemy_Melee
     - A simple enemy which spawns a crossbow or a sword and repeatedly attacks
