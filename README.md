@@ -3,6 +3,12 @@
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
 
+## March 7, 2026
+- Added BPO_ItemMaster_Weapon
+    - Will eventually replace current weapon system, including variable values and damage detection
+- Added focus path to W_ItemDisplay
+    - Clicking on or pressing tab with items in inventory will show which items are being selected
+
 ## February 28, 2026
 - Modified actor BP_Damager
     - Damager now has an updated mesh and collision box which only interacts with actor meshes
