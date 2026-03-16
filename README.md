@@ -2,6 +2,35 @@
 ## Notes
 - Add multiplayer support for aim offset: https://youtu.be/fAkEbqQH1b8
 - Add physics constraint component: https://youtu.be/N5iepSot6XM
+- For future AI controller, a global mediator should be considered to track group movement, detection, and coordination
+    - Application of Mediator Pattern: https://youtu.be/y4fE2JdFdvY
+- Will make use of object pools instead of constantly deleting and spawning actors, ie. Weapons, Projectiles, Pickups, etc
+    - Object Pooling: https://youtu.be/f797l7YTcgc
+- Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
+    - Assassinate: https://youtu.be/syd8_y7n-C0
+
+## March 16, 2026
+- Modifications to 'BPC_CombatSystem'
+    - Attack animation montages are now set in the combat system component instead of per item
+    - Added Function 'MakeAttack', which conducts all calculations and functions for dealing damage depending on the weapon type
+    - Added Function 'GetAttackMontage', which selects the animation to be played based on draw length and weapon type
+    - Event 'Reload' checks if the character has an inventory, gets the ammo, decrements it if available, plays the reload montage, and spawns a projectile
+- Modifiations to 'BPC_InventorySystem'
+    - Added Event 'EquipWeapon' to spawn a weapon in character hand
+    - Added Function 'GetAmmo' to check if a weapon's ammo class is available for use, and is referenced elsewhere such as in 'BPC_CombatSystem'
+    - Weapons can be equipped from the inventory by pressing E after selecting the item
+- Addition of 'BP_WeaponMaster' (+children)
+    - An Actor with a Skeletal Mesh and a Collision Box, with included functionality for dealing damage via collision and spawning projectiles
+    - BPO_Weapon in the Inventory make reference to the BP_Weapon class
+    - Attempting to tweak hit detection, ensuring that the intended limb is hit when attacking
+- Removal of previous skeletal mesh component 'BP_WeaponMaster,' and 'BP_WeaponPickup'
+    - Previous weapon system is now redundant, was based on adding a skeletal mesh to the actor with a component, disallowing further implemention of collision boxes, trails, mesh modifications, etc.
+    - Weapon pickup now replaced by BPC_InventorySystem
+    - Weapons now replaced by BP_WeaponMaster (_Project > Props > Weapons)
+- Tutorial Links & Resources
+    - Inventory System: https://youtu.be/egDxfhr4kzM (Part 1 to 6)
+    - Melee Combat System: https://youtu.be/DC7XkWXAKoE
+    - Projectile Launch System: https://youtu.be/hkQ9bEwpfV8
 
 ## March 7, 2026
 - Added BPO_ItemMaster_Weapon
