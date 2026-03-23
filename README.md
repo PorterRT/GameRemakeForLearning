@@ -9,6 +9,12 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## March 21, 2026
+- Fixed weapon collision detection
+    - Weapons with hit detection now draw a box trace matching the collision box
+- Added default weapon to spawn in BPC_CombatSystem
+    - Only to be used for NPCs that do not use an inventory
+
 ## March 16, 2026
 - Modifications to 'BPC_CombatSystem'
     - Attack animation montages are now set in the combat system component instead of per item
