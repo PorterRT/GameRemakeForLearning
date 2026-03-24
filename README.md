@@ -9,6 +9,14 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## March 23, 2026
+- Added event 'Delay Recovery' to 'BPC_StaminaSystem'
+    - Input an amount of time in seconds to delay the recovery of stamina
+- Changed function 'ConsumeStamina' in 'BPC_CombatSystem'
+    - Function checks if character has a stamina system component, then compares the weapon stamina drain to current stamina
+    - After attacking, stamina recovery is delayed by 2 seconds
+- Removed event dispatcher 'OnConsumeStamina' in 'BPC_CombatSystem'
+
 ## March 21, 2026
 - Fixed weapon collision detection
     - Weapons with hit detection now draw a box trace matching the collision box
