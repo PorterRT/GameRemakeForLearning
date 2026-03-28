@@ -20,7 +20,7 @@
     - Requests limb to be healed
 - Reconfiguring inventory overlay *WORK IN PROGRESS*
     - Added several buttons to cycle between tabs
-    - Added 'W_StatusTab' and 'W_HealthDisplay', which shows each individual limb, health bar, and prompt to heal
+    - Added 'W_Tab_Status' and 'W_Item_Limb', which shows each individual limb, health bar, and prompt to heal
 
 ## March 23, 2026
 - Added event 'Delay Recovery' to 'BPC_StaminaSystem'
