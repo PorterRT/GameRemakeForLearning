@@ -9,6 +9,19 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## March 27, 2026
+- Added new input to 'Heal' function in 'BPI_Damagable'
+- Modified 'BPC_DamageSystem'
+    - Tweaked 'Heal' function to check for limb to heal if specified, otherwise it heals all by an equal amount
+    - Added new function 'DamageLimb', receiving taken damage and multiplying it based on the limb injured to reflect vulnerability of different limbs
+    - Added new function 'HealLimb', which either heals all limbs by equal amount or a specified limb by amount
+    - Event dispatcher 'OnLimbCrippled' now called in 'DamageLimb' function
+- Modified 'Heal' interface function in 'BP_MasterCharacter'
+    - Requests limb to be healed
+- Reconfiguring inventory overlay *WORK IN PROGRESS*
+    - Added several buttons to cycle between tabs
+    - Added 'W_StatusTab' and 'W_HealthDisplay', which shows each individual limb, health bar, and prompt to heal
+
 ## March 23, 2026
 - Added event 'Delay Recovery' to 'BPC_StaminaSystem'
     - Input an amount of time in seconds to delay the recovery of stamina
