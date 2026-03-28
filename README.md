@@ -9,6 +9,25 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## March 28, 2026
+- Reconfigured 'W_DefaultOverlay'
+    - Added function 'OpenMenu', which brings up the inventory overlay
+    - Added function 'CloseMenu', which closes the inventory overlay and returns input to game
+    - Added function 'InitializeQuickAccess', *WORK IN PROGRESS*
+    - Added function 'SetTabDisplay', sets the current tab when a Selection button is released
+    - Added function 'ClearTabDisplay', clears the tab display window, effectively resetting the overlay
+    - Will remove function 'OpenInventory' once all features fully integrated
+- Reconfigured 'W_Tab_Status'
+    - Autopopulates the display tab with six limbs via 'W_Item_LimbHealthDisplay' widget
+    - 'W_Item_LimbHealthDisplay' widget pulls information about it's specified limb from owning character's 'BPC_DamageSystem' component, if present
+- Added 'W_Item_BoxDisplay' and 'W_Item_ContextWindow'
+    - Box display is used to show items at a glance, with the icon, item name and quantity of items in inventory
+    - Context window is used to display further information about an item when hovered over, including description, category, value, and weight
+- Added 'W_Tab_Crafting'
+- Added 'W_Tab_Equipment'
+- Added 'W_Tab_Inventory'
+- Added enumeration 'E_MenuTab'
+
 ## March 27, 2026
 - Added new input to 'Heal' function in 'BPI_Damagable'
 - Modified 'BPC_DamageSystem'
