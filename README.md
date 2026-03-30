@@ -9,6 +9,14 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## March 30, 2026
+- Tweaked 'BPC_DamageSystem'
+    - Corrected the handling of limb damage, calling for cripple limb, and tracking the condition of limbs
+- Renamed 'W_Item_BoxDisplay' to 'W_Item_Tile'
+- Renamed 'W_Item_ContextWindow' to 'W_Item_Detail'
+- Tweaked 'W_Item_Tile'
+    - Added a border to the item which changes colour upon selection
+
 ## March 28, 2026
 - Reconfigured 'W_DefaultOverlay'
     - Added function 'OpenMenu', which brings up the inventory overlay
