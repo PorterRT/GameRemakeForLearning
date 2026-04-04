@@ -9,6 +9,17 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 4, 2026
+- Added Crouch animations
+    - Imported new animations for idle and walk cycle
+    - Created blendspace for Crouch
+    - Tweaked Forward and Idle animation to match root
+- Tweaks to 'BPC_CombatSystem'
+    - Added pure function 'GetPitch', which returns the pitch of the character's body
+    - Added variable 'UnderhandThrowMontage', stores animation montage for underhand throw
+    - Modified pure function 'GetAttackMontage'
+        - Animation montage calculates overhand or underhand throw using GetPitch
+
 ## April 3, 2026
 - Added structure 'S_HealInfo'
     - Contains variables for determining how a character heals
