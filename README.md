@@ -9,6 +9,44 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 3, 2026
+- Added structure 'S_HealInfo'
+    - Contains variables for determining how a character heals
+        - 'Amount', float
+        - 'HealLimb', enumeration, specifies which limb to heal
+        - 'ShouldForceHeal', boolean, overrides whether character can heal
+        - 'ShouldHealAll', boolean, whether healing applies to all limbs equally
+        - 'CanHealCripple', boolean, whether healing can repair crippled limbs
+- Modified 'BPI_Damagable'
+    - Modified function 'Heal'
+        - New input 'HealInfo', stucture
+        - New output 'WasHealed', boolean
+        - Removed input 'Amount' and output 'Health'
+    - Added new function 'GetLimbHealth'
+- Modified 'BPC_DamageSystem'
+    - Added pure function 'GetLimbHealth', which finds the health value (float) and if the limb is crippled (boolean)
+    - Added function 'SetLimbHealth', which sets the health value and if the limb is crippled
+    - Added new boolean variable 'IsHealable'
+    - Modified event dispatcher 'OnLimbUpdate'
+        - Now simply calls whenever health of specified limb is updated; characters now handle limb health logic
+    - Modified 'Heal' function
+        - New input 'HealInfo' and output 'WasHealed'
+        - Function now checks if the character can heal, whether to heal all limbs, and returns if the healing was effective
+- Modified 'W_DefaultOverlay'
+    - Added map variable 'TabClassRef', which stores the User Widget class of each menu tab
+    - Added map variable 'TabObjectRef', which stores the User Widget object instance of each menu tab if available
+    - Added function 'InitializeTabs', which spawns all tabs from 'TabClassRef', collapses their visibility and adds them to 'TabObjectRef'
+    - Modified function 'SetTabDisplay', which sets visibility for already existing tabs to visible if available
+    - Modified function 'ClearTabDisplay', which sets visibility for all tabs to collapsed
+    - Upon widget construct, function 'InitializeTabs' spawns all the widgets needed for the menu
+- Modified 'W_Tab_Status' and 'W_Item_LimbHealthDisplay'
+    - Tab now handles all spawning and organizing of limb health bars
+    - Limb health bars update on changes to limb health, values are passed from tab
+- Updated 'BPO_ItemMaster_Consumable'
+    - Consumables now use 'HealInfo' structure variable
+- Updated event 'LimbUpdate' in 'BP_MasterCharacter' and 'BP_Enemy_Melee'
+- Deleted 'BP_Enemy_Ranged'
+
 ## March 30, 2026
 - Tweaked 'BPC_DamageSystem'
     - Corrected the handling of limb damage, calling for cripple limb, and tracking the condition of limbs
