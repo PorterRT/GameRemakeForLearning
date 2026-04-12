@@ -9,6 +9,13 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 12, 2026
+- Begun rework of Crouch animation
+    - Research Mirror: https://dev.epicgames.com/documentation/unreal-engine/mirroring-animation-in-unreal-engine
+    - https://youtu.be/crzl7NyqFFk
+- Begun rework of Tile View
+    - https://youtu.be/NInwimuI7Vg
+
 ## April 4, 2026
 - Added Crouch animations
     - Imported new animations for idle and walk cycle
