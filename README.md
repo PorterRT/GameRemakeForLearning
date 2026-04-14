@@ -9,6 +9,19 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 14, 2026
+- Deleted 'WBP_Item_Detail'
+- Modified 'WBP_SideMenu'
+    - Updated 'TabInventory' to include a 'TileListView' widget and 'TotalWeight' bar
+- Added 'BI_Inventory'
+    - 'BI_Inventory' is to be applied to actors with an 'AC_InventorySystem' component
+    - Handles inventory pull requests, using and equipping items, and dropping items
+    - Added functions 'GetInventoryItems', 'EquipItem', 'UseItem', 'DropItemPickup', 'AddItemPickup'
+- Modified 'BI_Interact'
+    - 'BI_Interact' is now responsible for handling interactions between level objects, Props, and the player
+    - It handles passing object information between interacting actors
+    - Deleted functions 'UseItem', 'EquipItem', and 'DropItem'
+
 ## April 13, 2026
 - Update: File structure reformatting, renaming, and cleanup of redundant elements
     - Renaming files in accordance with Recommended Asset Naming Conventions
