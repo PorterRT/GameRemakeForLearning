@@ -9,6 +9,58 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 13, 2026
+- Update: File structure reformatting, renaming, and cleanup of redundant elements
+    - Renaming files in accordance with Recommended Asset Naming Conventions
+        - Unreal Documentation: https://dev.epicgames.com/documentation/unreal-engine/recommended-asset-naming-conventions-in-unreal-engine-projects
+    - New folder 'StaminaSystem', contains all components relevant to stamina usage
+    - New folder 'CombatSystem', contains all components relevant to combat
+        - NOTE: Does not contain weapon and projectile assets, see 'Props' for weapon and projectile blueprints
+    - New folder 'AdvancedMovementSystem', contains all component relevant to advanced movement
+        - WIP: Will include separate component for crouch, prone, climb, vaulting, jumping, sliding, etc.
+    - New folder 'StealthSystem', contains all component relevant to stealth and detection
+        - WIP: Will include actor component for managing stealth mechanics, will interact with AI Perception
+    - Moved 'Actors' folder to '_Project', as 'Blueprints' folder redundant
+    - Removed placeholder animations for Crouch (prefix include 'OLD_AnimS_Crouch_*' and 'OLD_BS_Crouch')
+    - New folder 'Idle', 'Aim', 'Draw', 'Attack', and 'Interact' in 'Animations\Combat\'
+        - 'Idle' folder contains entry poses for each weapon equip
+        - 'Aim' folder contains animations when aiming weapons
+        - 'Draw' folder contains animations when drawing weapons to attack
+        - 'Attack' folder contains animations for attacking with a weapon
+        - 'Interact' folders contains miscellanous animations for combat interactions, such as blocking, reloading, drawing/stowing, etc
+- Modified 'AC_StaminaSystem'
+    - Added blueprint interface 'BI_Stamina', which includes functions for using the stamina system
+    - Simplified event 'ConsumeStamina'
+    - Added new function 'DrainStamina'
+- Modified 'WBP_StaminaBar'
+    - Removed redundant casting and cleaned up code
+- Added 'DT_ItemTable'
+    - Data table with row structs from 'F_ItemInfo'
+    - Will serve as primary source for populating instances of item objects with data
+- Added 'F_ItemInfo'
+    - Structure containing all information pertinent to interactable items
+- Modified 'BP_PickupMaster'
+    - Construction script now initiates from 'ItemName', a Data Table Row Handle variable meant to pull information from 'DT_ItemTable'
+    - 'ItemName' then pulls the 'ItemInfo' struct from the appropriate row, constructs a new 'BPO_ItemMaster' object, passes the Data Table Row Handle and Item Info to the object, sets the quantity, and updates the static mesh
+- Modified 'BI_Interact'
+    - Added new function 'GetItemInfo', which is to be used instead of casting for specific variables
+- Modified 'BPO_ItemMaster'
+    - Added new variable 'ItemInfo', a struct variable for 'F_Item_Info' which is set upon spawn
+    - Added new variable 'ItemRowHandle', a data table row handle variable which is set upon spawn
+    - Kept integer variable 'Quantity' and associated functions, as each object instance stores its own quantity in inventory
+    - Added new function 'GetName', which pulls the item name from structure for ease of use
+    - Added new function 'GetMaxQuantity', which pulls the maximum stack quantity for an item
+    - Removed all prior variables due to redundancy
+- Modified 'AC_InventorySystem'
+    - Tweaked function 'DropItemPickup' to correctly generate item pickups from inventory
+    - Changed function 'AddItemPickup' to be compatible with new data table
+- Modified 'WBP_SideMenu'
+    - Removed 'TabDisplay' and replaced with a Widget Switcher panel, minimizing bloat and interaction between multiple widget blueprints
+    - Deleted 'WBP_Tab_*' widget blueprints, as they are now redundant
+    - Added function 'InitializeLimbHealth', which creates limb health bars for each limb and syncs it via event dispatcher with the owner's 'DamageSystem' component
+- Modified 'WBP_LimbHealthBar'
+    - Renamed primary function to 'InitializeHealthBar'
+
 ## April 12, 2026
 - Begun rework of Crouch animation
     - Research Mirror: https://dev.epicgames.com/documentation/unreal-engine/mirroring-animation-in-unreal-engine
