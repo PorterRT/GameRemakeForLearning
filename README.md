@@ -9,6 +9,18 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 21, 2026
+- Modified 'AC_InventorySystem'
+    - New function 'SetItemObjectQuantities', which checks all items in inventory to distribute new pickups evenly
+    - New function 'AddItemObject', which constructs an 'BPO_ItemMaster', modifies it's quantity, and adds it to the 'Items' set variable
+- Modified 'BI_Interact'
+    - Function 'GetItemInfo' has new output, 'ItemObject' which is a self reference to instance of 'BPO_ItemMaster'
+- Modified 'WBP_SideMenu'
+    - When function 'LoadInventory' is called, it adds the set of Items from 'AC_InventorySystem' directly
+- Modified 'WBP_Item_Tile'
+    - When event 'On List Item Object Set' initializes, it pulls GetItemInfo from BI_Interact, binds an event to 'OnQuantityUpdated', and initializes the item info
+    - Now the items update as their quantities change
+
 ## April 14, 2026
 - Deleted 'WBP_Item_Detail'
 - Modified 'WBP_SideMenu'
