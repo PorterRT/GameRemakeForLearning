@@ -9,6 +9,19 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 23, 2026
+- Modified 'AC_InventorySystem'
+    - Input Action 'IA_Inventory' now handled in actor component
+- Modified 'WBP_SideMenu'
+    - Added button prompts to display window, which will dynamically change on item selection
+- Modified 'BI_Inventory'
+    - Function 'AddItemPickup' now uses 'F_ItemInfo' input instead of row handle
+    - Moved 'GetItemObject' to 'BI_ItemObject'
+- Modified 'BP_ItemPickup'
+    - Construction script now checks for 'ItemInfo', if invalid it sets one based on a handle, and passes 'ItemInfo' directly to spawning Item Object
+- Added Blueprint Interface 'BI_ItemObject'
+    - Implanted interface on 'BP_ItemObject'
+
 ## April 22, 2026
 - Deleted contents of Inventory Test
     - Includes 'BI_TileView', 'BP_ObjectEntry', 'WBP_EntryWidget', and 'WBP_Inventory'
