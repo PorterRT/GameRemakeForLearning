@@ -9,6 +9,40 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 22, 2026
+- Deleted contents of Inventory Test
+    - Includes 'BI_TileView', 'BP_ObjectEntry', 'WBP_EntryWidget', and 'WBP_Inventory'
+- Renamed several files
+    - Renamed folder 'Props' to 'Interactables'
+    - Renamed 'BP_PickupMaster' to 'BP_ItemPickup'
+    - Renamed 'BPO_ItemMaster' to 'BP_ItemObject'
+- Added Interact System with interfaces, widgets, etc.
+    - Tutorial for Interact System: https://youtu.be/nySnPkzpUn0
+    - Added actor component 'AC_InteractSystem'
+        - This component handles checking for interactable actors within range, storing them in an array, displaying widgets for interaction, and sending an 'Interact' message ('BI_Interact' interface) to said actors
+    - Modified 'BP_ItemPickup'
+        - Item mesh will now move to the instigator's location when interacted
+    - Modified 'BI_Interact'
+        - Added function 'GetInteractionType', which gets the value of an interactable set by 'E_InteractionType'
+        - Added function 'GetHoldDuration', which gets the float duration to hold before interacting with an actor
+    - Added Actor Blueprint 'BP_Door'
+        - A door can be opened and closed via 'Interact' message
+    - Added Pawn Blueprint 'BP_NPC'
+        - A pawn actor which randomly cycles dialogue and prints to screen via 'Interact' message
+    - Added Animation Sequence 'AS_Interact', and Montage 'AM_Interact'
+        - Played when AC_InteractSystem calls for 'Interact' message
+    - Added User Widget Blueprint 'WBP_Interactable'
+        - A HUD component which dynamically displays over objects which can be interacted with
+    - Added Enumeration 'E_InteractionType'
+        - A simple enumeration to define whether an item is press or hold to interact
+    - Modified 'IA_Interact'
+        - Changed trigger from 'Hold' to 'Release', allowing dynamic hold times
+    - Added Radial Progress Bar
+        - Tutorial Link: https://youtu.be/60W4vcnfsg8
+        - Added Material 'M_RadialProgressBar'
+        - Added Material Instance 'MI_RadialProgressBar'
+        - Added User Widget Blueprint 'WBP_RadialProgressBar', which is to be used for radial progress bars
+
 ## April 21, 2026
 - Modified 'AC_InventorySystem'
     - New function 'SetItemObjectQuantities', which checks all items in inventory to distribute new pickups evenly
