@@ -11,8 +11,15 @@
 
 ## April 27, 2026
 - Deleted numerous redundant item objects
-- Updated 'WBP_SideMenu' and 'WBP_LimbHealthBar'
+- Added new functions to 'BI_Inventory' and 'BI_ItemObject'
+- Added new Enumeration 'E_ItemInteractionType'
+- Update to 'WBP_SideMenu' and 'WBP_Item_Tile'
+    - 'On Key Down' function now checks for input mapping validity and then executes an interface function via 'BI_Inventory' as determined by macro 'SwitchInputOnKeyDown'
+- Updated to 'WBP_ButtonPrompt'
 - Started implementation of new weapon items
+    - Added 'DT_WeaponTable' and 'F_WeaponInfo' to organize weapon data in one position
+    - Added new Actor blueprints 'BP_Weapon_Base' and 'BP_Projectile_Base', which contain inheritable Events that define how each weapon behaves
+- Removed extra sockets in 'SK_Mannequin', replaced as Socket 'weapon_r'
 
 ## April 23, 2026
 - Modified 'AC_InventorySystem'
