@@ -9,6 +9,11 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 27, 2026
+- Deleted numerous redundant item objects
+- Updated 'WBP_SideMenu' and 'WBP_LimbHealthBar'
+- Started implementation of new weapon items
+
 ## April 23, 2026
 - Modified 'AC_InventorySystem'
     - Input Action 'IA_Inventory' now handled in actor component
