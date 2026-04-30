@@ -9,6 +9,19 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## April 30, 2026
+- Modified 'BP_Weapon_Base' and it's children
+    - 'BP_Weapon_Base' holds inherited functions and events for all weapons, including;
+        - Events 'AttackBegin', 'AttackEnd', and 'SpawnProjectile'
+        - Functions 'AttachToOwnerMesh', 'SetWeaponMeshCollision', 'GetDrawValues', 'PlayAttackSound', and 'SpawnImpactEffect'
+    - 'BP_Weapon_Melee' in a working state
+- Struct 'F_WeaponInfo' updated
+    - Now includes 'F_DamageInfo' as variable
+- Actor component 'AC_CombatSystem' overhauled
+    - Need to update functions 'SpawnNPCWeapon' and 'LaunchProjectile' **NOTE: Will be moved to 'BP_Weapon_Base'
+    - Added function 'SpawnWeapon', which is to be used in Inventory to equip a weapon to hand
+- Actor component 'AC_InventorySystem' added 'SpawnWeapon' functionality
+
 ## April 27, 2026
 - Deleted numerous redundant item objects
 - Added new functions to 'BI_Inventory' and 'BI_ItemObject'
