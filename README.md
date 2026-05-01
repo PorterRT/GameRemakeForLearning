@@ -9,6 +9,17 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## May 1, 2026
+- Moved 'Props' to 'CombatSystem' folder
+    - Weapons go in weapon hole, make sense to me
+- Modified 'BP_Weapon_Ranged'
+    - Finished AttackBegin event
+- Modified 'BP_Weapon_Throwable'
+    - Added 'Projectile Movement' component
+    - For some reason the weapon does not throw? Will resolve
+- Added Enumeration 'E_WeaponEffect'
+    - Included in 'F_WeaponInfo', allows for weapons to cycle between one damage instance, damage for a duration, or area of effect in 'AttackBegin'
+
 ## April 30, 2026
 - Modified 'BP_Weapon_Base' and it's children
     - 'BP_Weapon_Base' holds inherited functions and events for all weapons, including;
