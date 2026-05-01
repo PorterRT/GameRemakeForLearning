@@ -15,12 +15,19 @@
         - Events 'AttackBegin', 'AttackEnd', and 'SpawnProjectile'
         - Functions 'AttachToOwnerMesh', 'SetWeaponMeshCollision', 'GetDrawValues', 'PlayAttackSound', and 'SpawnImpactEffect'
     - 'BP_Weapon_Melee' in a working state
+    - 'BP_Weapon_Ranged' has implemented 'SpawnProjectile' function and 'AttackBegin' event
+- Added 'BP_Projectile_Base'
+    - A simple Actor, considering whether to handle functions in projectile or weapon blueprint
 - Struct 'F_WeaponInfo' updated
     - Now includes 'F_DamageInfo' as variable
 - Actor component 'AC_CombatSystem' overhauled
     - Need to update functions 'SpawnNPCWeapon' and 'LaunchProjectile' **NOTE: Will be moved to 'BP_Weapon_Base'
     - Added function 'SpawnWeapon', which is to be used in Inventory to equip a weapon to hand
 - Actor component 'AC_InventorySystem' added 'SpawnWeapon' functionality
+- Added function 'InteractItem' to 'AC_InventorySystem'
+    - Allows items to be used in inventory, each function needs to be set in the function
+- BeginPlay event of 'AC_InventorySystem' now spawns Backpack for Owning Actor
+    - Will eventually add hot bar function to Inventory
 
 ## April 27, 2026
 - Deleted numerous redundant item objects
