@@ -9,6 +9,13 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## May 6, 2026
+- Edited function 'EquipWeapon' in 'AC_CombatSystem'
+- Added 'IA_Number'
+    - 'IMC_Default' maps the keyboard numbers 1 to 0
+- Added Enhanced Input Action 'IA_Number' to 'AC_InventorySystem'
+    - Will integrate a hotkey function to equip weapons assigned to quick access slots
+
 ## May 1, 2026
 - Moved 'Props' to 'CombatSystem' folder
     - Weapons go in weapon hole, make sense to me
