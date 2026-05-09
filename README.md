@@ -9,6 +9,23 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## May 8, 2026
+- Created new branch 'InventoryRemake'
+- Moved Weapon and Projectile assets to folder '_Project\Assets\'
+- Replaced icons with PNG files for transparency
+- Added texture 'Icon_InventorySlot'
+- Added structure 'F_InventorySlotData'
+- Overhauled Inventory System
+    - Tutorial: https://youtu.be/E6OSEktabos
+    - 'AC_InventorySystem' nows calls functions 'InitializeSlots' on BeginPlay and creates 'WBP_SideMenu'
+    - Enhanced Input Action 'IA_SideMenu' now calls for event 'ToggleMenu' in 'WBP_SideMenu'
+        - Side Menu no longer sets input to UI Only, now sets between Game Only or Game and UI Only
+    - Added InventorySlots 'F_InventorySlotData' array variable, which is used to initialize slots and store F_ItemInfo
+    - 'WBP_SideMenu' replaced 'TileView_Inventory' with 'GridPanel_Inventory'
+        - New event 'InitializeInventory' creates an 'InventoryRef', calls function 'InitializeInventorySlots', and binds 'UpdateSlot' to 'OnItemAdded' event dispatcher
+        - New function 'AddItemNotification' creates widget to show most recent successful item pickup
+    - 'WBP_InventorySlot' (previously 'WBP_Item_Tile') nows calls function 'InitUpdateSlot' on Construct
+
 ## May 6, 2026
 - Edited function 'EquipWeapon' in 'AC_CombatSystem'
 - Added 'IA_Number'
