@@ -9,6 +9,16 @@
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
 
+## May 11, 2026
+- Added Drag & Drop Operation to Inventory System
+- Deleted BI_Inventory
+    - Blueprint Interface proved to be redunant, as all communication between Widget and Component is direct
+- Added functions 'UseItem' and 'DropItem' to 'AC_InventorySystem'
+- Mild tweaks to 'WBP_SideMenu' design and layout
+- Add 3D Mesh to Menu?
+    - Tutorial: https://youtu.be/XWXXoAgugD8
+- Side Note: It may be beneifical in the future to reorganize the Side Menu to be composed of Widget components instead of handling all events in one widget, best to do early
+
 ## May 8, 2026
 - Created new branch 'InventoryRemake'
 - Moved Weapon and Projectile assets to folder '_Project\Assets\'
