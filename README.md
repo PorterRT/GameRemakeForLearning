@@ -8,6 +8,48 @@
     - Object Pooling: https://youtu.be/f797l7YTcgc
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
+- Will add a static mesh to icon generator
+    - YouTube: https://youtu.be/EpthBJJ9S-o
+
+## August 23, 2026
+- Added basic parkour movement
+    - Movements to add include 'Vault Onto', 'Vault Over', 'Pull Up', and 'Jump Down'
+        - Tutorial: https://youtu.be/6hPArmWkKJQ
+    - Added new macro 'Parkour' in 'BP_MasterCharacter'
+        - Macro draws several line traces to determine obstacle location, normal, and height as vector variables
+        - Vector variables are used to determine whether the character can vault/climb, and whether the wall is thick enough to stand on
+        - Sets capsule to no collision and movement to flying, then plays animation montage
+    - Added some simple obstacles to ThirdPersonMap level
+    - Added 4 new animation sequences to 'Animations\Parkour'
+    - Added new input action 'IA_Parkour'
+        - Input action bound to 'V' in 'IMC_Default'
+
+## May 11, 2026
+- Added Drag & Drop Operation to Inventory System
+- Deleted BI_Inventory
+    - Blueprint Interface proved to be redunant, as all communication between Widget and Component is direct
+- Added functions 'UseItem' and 'DropItem' to 'AC_InventorySystem'
+- Mild tweaks to 'WBP_SideMenu' design and layout
+- Add 3D Mesh to Menu?
+    - Tutorial: https://youtu.be/XWXXoAgugD8
+- Side Note: It may be beneifical in the future to reorganize the Side Menu to be composed of Widget components instead of handling all events in one widget, best to do early
+
+## May 8, 2026
+- Created new branch 'InventoryRemake'
+- Moved Weapon and Projectile assets to folder '_Project\Assets\'
+- Replaced icons with PNG files for transparency
+- Added texture 'Icon_InventorySlot'
+- Added structure 'F_InventorySlotData'
+- Overhauled Inventory System
+    - Tutorial: https://youtu.be/E6OSEktabos
+    - 'AC_InventorySystem' nows calls functions 'InitializeSlots' on BeginPlay and creates 'WBP_SideMenu'
+    - Enhanced Input Action 'IA_SideMenu' now calls for event 'ToggleMenu' in 'WBP_SideMenu'
+        - Side Menu no longer sets input to UI Only, now sets between Game Only or Game and UI Only
+    - Added InventorySlots 'F_InventorySlotData' array variable, which is used to initialize slots and store F_ItemInfo
+    - 'WBP_SideMenu' replaced 'TileView_Inventory' with 'GridPanel_Inventory'
+        - New event 'InitializeInventory' creates an 'InventoryRef', calls function 'InitializeInventorySlots', and binds 'UpdateSlot' to 'OnItemAdded' event dispatcher
+        - New function 'AddItemNotification' creates widget to show most recent successful item pickup
+    - 'WBP_InventorySlot' (previously 'WBP_Item_Tile') nows calls function 'InitUpdateSlot' on Construct
 
 ## May 6, 2026
 - Edited function 'EquipWeapon' in 'AC_CombatSystem'
