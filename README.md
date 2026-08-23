@@ -8,6 +8,21 @@
     - Object Pooling: https://youtu.be/f797l7YTcgc
 - Will add a soft move to target function with melee attacks, as well as an Assassinate mechanic
     - Assassinate: https://youtu.be/syd8_y7n-C0
+- Will add a static mesh to icon generator
+    - YouTube: https://youtu.be/EpthBJJ9S-o
+
+## August 23, 2026
+- Added basic parkour movement
+    - Movements to add include 'Vault Onto', 'Vault Over', 'Pull Up', and 'Jump Down'
+        - Tutorial: https://youtu.be/6hPArmWkKJQ
+    - Added new macro 'Parkour' in 'BP_MasterCharacter'
+        - Macro draws several line traces to determine obstacle location, normal, and height as vector variables
+        - Vector variables are used to determine whether the character can vault/climb, and whether the wall is thick enough to stand on
+        - Sets capsule to no collision and movement to flying, then plays animation montage
+    - Added some simple obstacles to ThirdPersonMap level
+    - Added 4 new animation sequences to 'Animations\Parkour'
+    - Added new input action 'IA_Parkour'
+        - Input action bound to 'V' in 'IMC_Default'
 
 ## May 11, 2026
 - Added Drag & Drop Operation to Inventory System
