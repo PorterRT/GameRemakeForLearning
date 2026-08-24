@@ -23,6 +23,13 @@
     - Added 4 new animation sequences to 'Animations\Parkour'
     - Added new input action 'IA_Parkour'
         - Input action bound to 'V' in 'IMC_Default'
+- Added light object
+    - Added a pawn class blueprint 'BP_Light' to 'Interactables'
+        - Checks for actor added to hitbox array
+        - Draws three line traces to points on actor, calculate distance via inverse square law
+        - Three lines are averaged to create an intensity float value from 0 to 1
+    - Light intensity value will be interpreted by Stealth Component (TBA)
+    - NOTE: Rewrite code to object class, make actor attachable to interactable objects to fix interact at distance bug
 
 ## May 11, 2026
 - Added Drag & Drop Operation to Inventory System
