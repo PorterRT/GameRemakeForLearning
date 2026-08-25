@@ -11,6 +11,25 @@
 - Will add a static mesh to icon generator
     - YouTube: https://youtu.be/EpthBJJ9S-o
 
+## August 25, 2026
+- Added 'LC_LightSource'
+    - Moved to '_Project\StealthSystem\'
+    - Light source component adds point light with a collision box, which checks for overlapping actors every second
+    - Uses inverse square law to calculate light intensity for overlapping actors, producing a float value from 0 to 1
+    - Points on actor are determined by bone location
+- Updated 'BP_Light'
+    - Moved all light detection functionality to LC_LightSource
+- Added 'BP_Torch'
+    - A placeholder torch asset with fire, interaction, and light detection
+- Updated 'AC_InteractSystem'
+    - Capsule overlap event now checks if overlapping component has tag 'Interact'
+- Added fire niagara system
+    - Named 'NS_Fire' under '_Project\Assets'
+    - Made using assets from 'StarterContent'
+    - Tutorial: https://youtu.be/q8avHL7syC4
+- Added 'AC_StealthSystem'
+    - No functionality currently, TBA
+
 ## August 23, 2026
 - Added basic parkour movement
     - Movements to add include 'Vault Onto', 'Vault Over', 'Pull Up', and 'Jump Down'
