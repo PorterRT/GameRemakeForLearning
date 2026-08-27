@@ -11,6 +11,16 @@
 - Will add a static mesh to icon generator
     - YouTube: https://youtu.be/EpthBJJ9S-o
 
+## August 27, 2026
+- Updated 'BP_Torch'
+    - Added functionality to attach to nearest wall; on BeginPlay, macro AttachToNearestWall detects WorldStatic objects within 50cm, snapping torch location and rotation to hit object
+- Updated 'LC_LightSource'
+    - Reworked light source to not use collision boxes, account for missing bones, and trace bonse via map variable
+- Added 'WBP_DebugText'
+    - A simple text box to display over 'BP_NPC'
+- Updated 'BP_NPC'
+    - Added macro 'RenderTextWidget', with duration and colour
+
 ## August 25, 2026
 - Added 'LC_LightSource'
     - Moved to '_Project\StealthSystem\'
