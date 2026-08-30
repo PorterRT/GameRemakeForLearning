@@ -11,15 +11,53 @@
 - Will add a static mesh to icon generator
     - YouTube: https://youtu.be/EpthBJJ9S-o
 
+## August 28, 2026
+- Added 'WBP_DebugText' to 'BP_MasterCharacter'
+    - A simple widget component with a 'RenderTextWidget' macro, allowing us to display text over all child actors
+- NOTE: Began implementation of guard NPC artificial intelligence
+- Added 'AIC_Guard'
+    - An AI Controller component, which upon assignment, possesses all pawns requiring AI controller
+    - Includes component 'AIPerception', where configuration for Sight, Hearing, Touch, and Prediction can be configured
+- Added 'BP_AIMediator'
+    - A scene actor which acts as a mediator between all AI actors in a given scene
+- Added 'ST_Guard'
+    - A state tree meant to control the evaluation and tasks of all Guard NPCs
+    - This state tree Schema has been configured for Guard NPCs
+        - AIController class set to 'AIC_Guard'
+        - Context Actor class set to 'BP_NPC'
+- Added 'STE_Base'
+    - A state tree evaluator which handles basic perception from component AIPerception
+- Added 'STT_Base'
+    - A state tree task which acts as the parent for all AI tasks
+- Updated Gameplay Tag Manager
+    - Added 'State' tag under source file 'DefaultGameplayTags.ini', with subtags to be used for permanent, interchangable, and/or character-dependant states
+        - Added 'State.Affiliation'
+            - Added 'State.Affiliation.Player'
+            - Added 'State.Affiliation.Hostile'
+            - Added 'State.Affiliation.Neutral'
+            - Added 'State.Affiliation.Friendly'
+
 ## August 27, 2026
 - Updated 'BP_Torch'
     - Added functionality to attach to nearest wall; on BeginPlay, macro AttachToNearestWall detects WorldStatic objects within 50cm, snapping torch location and rotation to hit object
 - Updated 'LC_LightSource'
-    - Reworked light source to not use collision boxes, account for missing bones, and trace bonse via map variable
+    - Reworked light source to not use collision boxes, account for missing bones, and detect mesh bones to trace to via map variable
 - Added 'WBP_DebugText'
     - A simple text box to display over 'BP_NPC'
 - Updated 'BP_NPC'
     - Added macro 'RenderTextWidget', with duration and colour
+- Added 'AC_GameplayTagManager' under '_Project\TagManager'
+    - An actor component meant to store gameplay tags on an actor, as well as manage logic for adding and removing multiple tags at once
+- Added 'BFL_GameplayTagFunctions'
+    - A standardized list of functions to be used when querying gameplay tags
+- Updated Gameplay Tag Manager
+    - Added 'Status' tag under source file 'StealthGameplayTags.ini', with subtags to be used for temporary effects
+        - Added 'Status.Concealment' 
+            - Added 'Status.Concealment.Hidden'
+            - Added 'Status.Concealment.Obscured'
+            - Added 'Status.Concealment.Visible'
+            - Added 'Status.Concealment.Invisible'
+- Renamed Nigara System object prefixes from 'NS_' to 'FXS_'
 
 ## August 25, 2026
 - Added 'LC_LightSource'
